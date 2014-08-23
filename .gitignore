@@ -1,4 +1,4 @@
 /cookbooks/
-/nodes/
+/nodes/*.json
 /tmp/
 /.vagrant/
