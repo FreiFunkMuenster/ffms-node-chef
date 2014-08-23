@@ -13,3 +13,6 @@ end
   package pkg
 end
 
+file "/var/www/html/index.html" do
+  content nil
+end
