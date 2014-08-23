@@ -8,6 +8,20 @@ end
 
 package "batman-adv-dkms"
 
+execute "reload batman_adv" do
+  command "modprobe -r batman-adv; modprobe batman-adv"
+  action :nothing
+end
+
+bash "install right version of batman-adv" do
+  code <<-EOF
+dkms remove batman-adv/2013.4.0 --all
+dkms --force install batman-adv/2013.4.0
+  EOF
+  not_if { File.open("/sys/module/batman_adv/version").read =~ /^2013\.4\.0/ }
+  notifies :run, "execute[reload batman_adv]", :immediately
+end
+
 ruby_block "load batman-adv module" do
   block do
     fe = Chef::Util::FileEdit.new("/etc/modules")
@@ -17,6 +31,14 @@ ruby_block "load batman-adv module" do
 end
 
 execute "modprobe batman-adv"
+
+ruby_block "load interfaces.d" do
+  block do
+    fe = Chef::Util::FileEdit.new("/etc/network/interfaces")
+    fe.insert_line_if_no_match(/source/, 'source /etc/network/interfaces.d/*.cfg')
+    fe.write_file
+  end
+end
 
 execute "ifup bat0" do
   action :nothing
