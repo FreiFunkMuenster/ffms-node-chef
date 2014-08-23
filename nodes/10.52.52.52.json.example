@@ -1,0 +1,13 @@
+{
+  "run_list": [
+    "recipe[ffms::service]"
+    ],
+  "fastd": {
+    "br0": {
+      "address": "10.43.0.13",
+      "netmask": "255.255.0.0",
+      "address6": "fd68:e2ea:a53::13",
+      "netmask6": "48"
+    }
+  }
+}
