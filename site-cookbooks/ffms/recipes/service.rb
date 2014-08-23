@@ -1,3 +1,4 @@
+include_recipe "ffms::base"
 include_recipe "ffms::firewall"
 include_recipe "ffms::batman-adv"
 include_recipe "ffms::fastd"
