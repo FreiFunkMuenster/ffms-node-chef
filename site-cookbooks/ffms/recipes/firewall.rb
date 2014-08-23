@@ -1,3 +1,5 @@
+package 'ufw'
+
 firewall_rule "ssh" do
   port 22
   action :allow

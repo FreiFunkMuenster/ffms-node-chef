@@ -18,7 +18,7 @@ bash "install right version of batman-adv" do
 dkms remove batman-adv/2013.4.0 --all
 dkms --force install batman-adv/2013.4.0
   EOF
-  not_if { File.open("/sys/module/batman_adv/version").read =~ /^2013\.4\.0/ }
+  not_if { File.exists?("/sys/module/batman_adv/version") && File.open("/sys/module/batman_adv/version").read =~ /^2013\.4\.0/ }
   notifies :run, "execute[reload batman_adv]", :immediately
 end
 
@@ -38,6 +38,10 @@ ruby_block "load interfaces.d" do
     fe.insert_line_if_no_match(/source/, 'source /etc/network/interfaces.d/*.cfg')
     fe.write_file
   end
+end
+
+directory "/etc/network/interfaces.d" do
+  action :create
 end
 
 execute "ifup bat0" do
