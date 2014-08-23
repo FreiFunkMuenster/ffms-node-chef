@@ -3,6 +3,9 @@
     "recipe[ffms::service]"
     ],
   "fastd": {
+    "bat0": {
+      "mac": "de:ad:be:ef:43:13"
+    },
     "br0": {
       "address": "10.43.0.13",
       "netmask": "255.255.0.0",
