@@ -1,0 +1,17 @@
+interface "mesh-vpn";
+user "nobody";
+mode tap;
+method "salsa2012+gmac";
+mtu 1406; # 1406 - ipv6 header - fastd header
+include "/etc/fastd/vpn/secret.conf";
+
+log to syslog level debug;
+
+include peers from "<%= node[:fastd][:git][:path] %>/<%= node[:fastd][:git][:peers_path] %>";
+
+on up "
+  ip link set dev $INTERFACE address <%= node[:fastd][:bat0][:mac] %>
+  ip link set dev $INTERFACE up
+  ifup bat0
+  batctl if add $INTERFACE
+";

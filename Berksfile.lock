@@ -1,0 +1,23 @@
+DEPENDENCIES
+  ffms
+    path: site-cookbooks/ffms
+  icinga
+    path: site-cookbooks/icinga
+
+GRAPH
+  apt (2.5.3)
+  chef-sugar (2.2.0)
+  ffms (0.1.0)
+    apt (>= 0.0.0)
+    firewall (>= 0.0.0)
+  firewall (0.11.8)
+  icinga (0.1.0)
+    mysql (>= 0.0.0)
+    openssl (>= 0.0.0)
+  mysql (5.3.6)
+    yum-mysql-community (>= 0.0.0)
+  openssl (2.0.0)
+    chef-sugar (>= 0.0.0)
+  yum (3.2.4)
+  yum-mysql-community (0.1.10)
+    yum (>= 3.0)

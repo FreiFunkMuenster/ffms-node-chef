@@ -1,0 +1,11 @@
+auto br0
+
+iface br0 inet static
+        address <%= node[:fastd][:br0][:address] %>
+        netmask <%= node[:fastd][:br0][:netmask] %>
+        bridge_ports none
+
+iface br0 inet6 static
+        address <%= node[:fastd][:br0][:address6] %>
+        netmask <%= node[:fastd][:br0][:netmask6] %>
+
